@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>YOUR BIRTHDAY GIFT</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/img/favicon.jpg" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="assets\css\sty.css">     
+    </head> 
+    <body>
+        <div class="container">
+            <div >
+                <h1 class = "header_text">Maaf ya kalau cuma bisa ngasih giniann</h1>
+                <h1 class = "header_text">dimaafin engga?</h1>
+            </div>
+            <div class="gif_container">
+                <img src="https://media.giphy.com/media/eHWUyxudOQGCulzFFR/giphy.gif">
+            </div>
+            <div class = "buttons">
+                <button class="btn" id = "yesButton" onclick="nextPage()">iyaa</button>
+                <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">enggaa</button>
+                <audio autoplay loop>
+                    <source src="assets\HBD SONGS.mp3" type="audio/mpeg">
+                  </audio>
+                <script>
+                    function nextPage() {
+                        window.location.href = "yes.html";
+                    }
+                    
+                    function moveButton() {
+                        var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
+                        var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
+                        document.getElementById('noButton').style.left = `${x}px`;
+                        document.getElementById('noButton').style.top = `${y}px`;
+                    }
+
+                    function playAudio() {
+                    var audio = document.querySelector('audio');
+                        audio.play();
+                    }
+                </script> 
+            </div>
+        </div>
+       
+    </body> 
+</html>

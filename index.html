@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>YOUR BIRTHDAY GIFT</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="assets/img/favicon.jpg" sizes="32x32" type="image/png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <button id="startDetectionButton">TEKEN TERUS TIUP YA!❤️</button>
+    <div class="wrapper">
+        <div class="candle"></div>
+        <div class="cake">
+             <div class="lyr lyr-1"></div>
+             <div class="lyr lyr-2"></div>
+             <div class="lyr lyr-3"></div>
+        </div>
+        <div class="candle"></div>
+        <div class="fram">
+            <div id="elementToHide" style="display: block;">
+                <!-- Element yang ingin Anda sembunyikan -->
+                <div class="flm-part red fliped"></div>
+                <div class="flm-part orange"></div>
+                <div class="flm-part yellow fliped"></div>
+                <div class="flm-part white"></div>
+            </div>
+        </div>
+
+        <button id="buttonToAnotherPage">NEXT GIFT</button>
+
+        <audio id="audioElement" src="assets/HBD SONGS.mp3" preload="auto"></audio>
+        <script>
+        // Membuat variabel untuk menyimpan elemen yang akan dihilangkan
+        var elementToHide = document.getElementById('elementToHide');
+
+        document.getElementById("buttonToAnotherPage").onclick = function() {
+      // Mengarahkan ke halaman lain saat tombol diklik
+      window.location.href = "GIFT 1.html";
+        };
+        
+        // Membuat variabel untuk menyimpan tombol
+        var startDetectionButton = document.getElementById('startDetectionButton');
+        
+        // Membuat variabel untuk menyimpan objek AudioContext
+        var audioContext = null;
+        
+        // Membuat variabel untuk menyimpan suara lagu
+        var audioElement = document.getElementById('audioElement');
+        
+        // Mengubah sumber lagu ke "Happy Birthday Music Box (Slow Version)"
+        audioElement.src = "assets/HBD SONGS.mp3";
+        
+        // Membuat variabel untuk menyimpan konfigurasi deteksi ambang batas
+        var thresholdConfig = {
+            threshold: 0.3, // Ambang batas suara, bisa disesuaikan sesuai kebutuhan
+            interval: 250, // Interval untuk memeriksa ambang batas (dalam milidetik)
+            decay: 0.95 // Faktor pelemahan (untuk mengurangi sensitivitas)
+        };
+        
+        // Membuat variabel untuk menyimpan nilai ambang batas dinamis
+        var dynamicThreshold = thresholdConfig.threshold;
+        
+        // Fungsi untuk memulai deteksi suara
+        function startDetection() {
+            // Hanya mulai jika audio context belum ada atau telah dihentikan
+            if (!audioContext || audioContext.state === 'closed') {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(function(stream) {
+                        var mediaStreamSource = audioContext.createMediaStreamSource(stream);
+                        var analyser = audioContext.createAnalyser();
+                        analyser.fftSize = 2048;
+                        mediaStreamSource.connect(analyser);
+        
+                        var bufferLength = analyser.frequencyBinCount;
+                        var dataArray = new Float32Array(bufferLength);
+        
+                        // Mengatur interval untuk memeriksa ambang batas suara
+                        setInterval(function() {
+                            analyser.getFloatTimeDomainData(dataArray);
+                            checkThreshold(dataArray);
+                            // Mengurangi nilai ambang batas secara bertahap
+                            dynamicThreshold *= thresholdConfig.decay;
+                        }, thresholdConfig.interval);
+                    })
+                    .catch(function(err) {
+                        console.log('Gagal mengakses mikrofon:', err);
+                    });
+            }
+            // Memainkan suara lagu
+            audioElement.play();
+        }
+        
+        // Membuat fungsi untuk memeriksa apakah level suara melebihi ambang batas
+        function checkThreshold(buffer) {
+            var bufferLength = buffer.length;
+            var total = 0;
+        
+            // Menghitung nilai rata-rata dari amplitudo dalam buffer
+            for (var i = 0; i < bufferLength; i++) {
+                total += Math.abs(buffer[i]);
+            }
+            var rms = Math.sqrt(total / bufferLength);
+        
+            // Memeriksa apakah nilai rata-rata melebihi ambang batas
+            if (rms > dynamicThreshold) {
+                elementToHide.style.display = 'none'; // Menyembunyikan elemen jika ambang batas terpenuhi
+            }
+        }
+        
+        // Menambahkan event listener untuk tombol
+        startDetectionButton.addEventListener('click', function() {
+            startDetection(); // Memulai deteksi suara saat tombol ditekan
+        });
+        </script>
+</body>
+</html>

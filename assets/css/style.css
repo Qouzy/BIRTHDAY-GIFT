@@ -1,0 +1,279 @@
+body {
+  background-color: rgb(189, 225, 122);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#startDetectionButton {
+  background-color: #f0f0f0; /* Warna latar belakang */
+  border: none; /* Hilangkan border */
+  color: #333; /* Warna teks */
+  padding: 10px 20px; /* Padding */
+  font-size: 16px; /* Ukuran teks */
+  cursor: pointer; /* Kursor saat dihover */
+  border-radius: 5px; /* Sudut lengkung */
+  transition: background-color 0.3s, color 0.3s; /* Animasi perubahan warna */
+
+  position: absolute; /* Atur posisi absolut */
+  top: 15%; /* Posisi dari atas ke tengah */
+  left: 50%; /* Posisi dari kiri ke tengah */
+  transform: translate(-50%, -50%);
+}
+
+#startDetectionButton:hover {
+  background-color: #ddd; /* Warna latar belakang saat dihover */
+  color: #000; /* Warna teks saat dihover */
+}
+
+.wrapper {
+  position: relative;
+  width: 240px;
+  height: 480px;
+}
+
+.cake {
+  position: absolute;
+  bottom: 0;
+}
+
+.lyr {
+  width: 240px;
+  height: 96px;
+  position: absolute;
+  background-color: currentColor;
+  border-radius: 120px / 24px ;
+}
+
+.lyr-1 {
+  color: rgb(238, 57, 117);
+  bottom: 0;
+}
+
+.lyr-2 {
+  color: rgb(236, 86, 136);
+  bottom: 48px;
+}
+
+.lyr-3 {
+  color: rgb(235, 109, 151);
+  bottom: 96px;
+  background-image: radial-gradient(ellipse 7.5rem 1.5rem at 7.5rem 1.5rem, gold, gold 5%, #E99788 100%, transparent);
+}
+
+.candle {
+  position: absolute;
+  background-color: red;
+  width:32px;
+  left: 104px;
+  height: 160px;
+  bottom: 160px;
+  border-radius: 20px / 10px;
+  background-image: repeating-linear-gradient(45deg, white, white 10%, transparent 10%, transparent 20%);
+}
+
+.candle::before {
+  content: '';
+  position: absolute;
+  background-color: black;
+  width: 4px;
+  height: 32px;
+  border-radius: 4px / 2.4px;
+  left: 15px;
+  top: -22px;
+}
+
+.candle::after {
+   background-color: red;
+   display: block;
+   content: '';
+   width: 32px;
+   height: 16px;
+   border-radius: 50%;
+}
+
+.fram {
+  position: absolute;
+  left: 104px;
+}
+
+
+.smoke {
+  color: currentColor;
+  background-color: currentColor;
+  top: 125px;
+  width: 6px;
+  height: 6px;
+  position: relative;
+  animation-name: burn-smoke;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+.smk-1 {
+  left: 8px;
+  animation-duration: .5s;
+}
+
+.smk-2 {
+  left: -8px;
+  animation-duration: .6s;
+}
+
+.smk-3 {
+  left: 16px;
+   animation-duration: .7s;
+}
+
+.smk-4 {
+  left: 24px;
+  animation-duration: .8s;
+}
+.smk-5 {
+  left: 32px;
+  animation-duration: .9s;
+}
+
+
+.flm-part {
+  background-color: currentColor;
+  border-color: currentColor;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: relative;
+  transform: rotate(60deg) skewX(0deg) scale(1);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.flm-part.fliped {
+  transform: rotate(120deg) skewX(0deg) scale(1);
+}
+
+.flm-part::before {
+  content: '';
+  position: absolute;
+  border-radius: 0 0 0 100%;
+  border-bottom-style: solid;
+  border-bottom-color:inherit;
+  border-bottom-width: 32px;
+  width: 32px;
+  height: 8px;
+  left: -16px;
+  top: -8px;
+}
+
+.flm-part.fliped::before  {
+  border-radius: 100% 0 0 0;
+  border-bottom: 0 solid transparent;
+  border-top-style: solid;
+  border-top-color: inherit;
+   border-top-width:32px;
+   width: 32px;
+  height: 8px;
+  left: -16px;
+  top: 0px;
+}
+
+.red {
+  color: red;
+  top: 84.4px;
+  opacity: 0.7;
+  animation-name: burn-red;
+  animation-duration: 1s;
+}
+
+.orange {
+  color: orange;
+  top: 57px;
+  opacity: 0.8;
+  box-shadow: 0 0 16px orange;
+   animation-name: burn-orange;
+  animation-duration: 0.4s;
+}
+
+.yellow {
+  color: yellow;
+  top: 28px;
+  opacity: 0.9;
+  box-shadow: 0 0 16px yellow;
+   animation-name: burn-yellow;
+  animation-duration: 1.6s;
+}
+
+.white {
+  color: white;
+  box-shadow: 0 0 16px white;
+   animation-name: burn-white;
+  animation-duration: 1.8s;
+}
+
+
+@keyframes burn-smoke {
+  0% { transform: rotate(0deg) scale(1);  opacity: 1; }
+  100% {transform: rotate(360deg) scale(4); opacity: 0; top: 0;}
+}
+
+@keyframes burn-red {
+  0% { transform: rotate(120deg) skewX(0deg) scale(1.8)}
+  20% { transform: rotate(118deg) skewX(5deg) scale(2)}
+  40% { transform: rotate(120deg) skewX(0deg) scale(1.8)}
+  60% { transform: rotate(122deg) skewX(-5deg) scale(2)}
+  100% { transform: rotate(120deg) skewX(0deg) scale(1.8)}
+}
+
+@keyframes  burn-white {
+  0% { transform: rotate(60deg) skewX(0deg) scale(1)}
+  20% { transform: rotate(50deg) skewX(-3deg) scale(1.1)}
+  40% { transform: rotate(60deg) skewX(0deg) scale(1)}
+  60% { transform: rotate(70deg) skewX(3deg) scale(1.1)}
+  100% {transform: rotate(60deg) skew(0deg) scale(1)}
+}
+
+@keyframes burn-yellow {
+  0% { transform: rotate(120deg) skewX(0deg) scale(1.4)}
+  20% { transform: rotate(110deg) skewX(10deg) scale(1.5)}
+  40% { transform: rotate(120deg) skewX(0deg) scale(1.4)}
+  60% { transform: rotate(130deg) skewX(-10deg) scale(1.5)}
+  100% {transform: rotate(120deg) skew(0deg) scale(1.4)}
+}
+
+@keyframes burn-orange {
+  0% { transform: rotate(65deg) skewX(0deg) scale(1.6)}
+  20% { transform: rotate(60deg) skewX(-15deg) scale(1.7)}
+  40% { transform: rotate(65deg) skewX(0deg) scale(1.6)}
+  60% { transform: rotate(70deg) skewX(2deg) scale(1.7)}
+  100% {transform: rotate(65deg) skew(0deg) scale(1.6)}
+}
+
+
+footer {
+  background-color: #333; /* Warna latar belakang footer */
+  color: #cf7c7c; /* Warna teks footer */
+  padding: 20px; /* Padding di dalam footer */
+  text-align: center; /* Pusatkan teks dalam footer */
+  position: relative; /* Tetapkan posisi relatif */
+  width: 100%; /* Lebar footer */
+}
+
+/* Style untuk tombol dalam footer */
+#buttonToAnotherPage {
+  background-color: rgb(238, 57, 117); /* Warna latar belakang tombol */
+  color: rgb(238, 57, 117); /* Warna teks tombol */
+  border: none; /* Hapus border tombol */
+  padding: 10px 20px; /* Padding tombol */
+  font-size: 16px; /* Ukuran font tombol */
+  cursor: pointer; /* Tampilkan cursor pointer saat dihover */
+  border-radius: 5px; /* Border radius tombol */
+  position: absolute; /* Tetapkan posisi absolut */
+  bottom: -2px; /* Tempatkan tombol di bawah footer */
+  left: 50%; /* Pusatkan tombol secara horizontal */
+  transform: translateX(-50%);/* Pusatkan tombol secara horizontal */
+}
+
+/* Style untuk tombol saat dihover */
+#buttonToAnotherPage:hover {
+  background-color: rgb(255, 255, 255); /* Warna latar belakang tombol saat dihover */
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>YOUR BIRTHDAY GIFT</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/img/favicon.jpg" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="assets\css\st.css">
+</head>
+
+<body>
+<div class="body">
+ <div class="birthdayCard">
+<div class="cardFront"><h3 class="happy">HAPPY BIRTHDAY</h3>
+<div class="balloons">
+  <div class="balloonOne"></div>
+  <div class="balloonTwo"></div>
+  <div class="balloonThree"></div>
+  <div class="balloonFour"></div>
+</div>
+</div>
+<div class="cardInside">
+    <h3 class="back">HAPPY BIRTHDAY!</h3>
+    <p contenteditable="true">Dear SITI,</p> 
+    <p contenteditable="true">Happy birthday!! I hope your day is filled with lots of love and laughter! May all of your birthday wishes come true.</p>
+    <p contenteditable="true" class="name" id="name">ZIDAN</p>
+  </div>
+</div>
+</div>
+
+<audio autoplay loop>
+  <source src="assets\HBD SONGS.mp3" type="audio/mpeg">
+</audio>
+
+  <script>
+    document.getElementById("name").onclick = function() {
+      // Mengarahkan ke halaman lain saat tombol diklik
+      window.location.href = "GIFT 2.html";
+        };
+    function playAudio() {
+      var audio = document.querySelector('audio');
+      audio.play();
+    }
+  </script>
+</body>
+</html>
